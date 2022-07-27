@@ -56,3 +56,6 @@ void loop() {
 
 }
 ```
+## The simulation 
+<img width="959" alt="image" src="https://user-images.githubusercontent.com/108204114/181376950-1fa2e826-7688-40d1-b6a7-49867899a1e3.png">
+
