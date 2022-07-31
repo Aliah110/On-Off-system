@@ -1,30 +1,26 @@
-//set pin numbers
-const int ledPin = 2;         //const won't change
-const int buttonPin = 4;
+#define LED_PIN 2
+#define BUTTON_PIN 4
+#define Relay_PIN 7
 
-//variables will change
-int buttonState = 0;          //variables for reading the pushbutton status
+
+byte lastButtonState = LOW;
+byte ledState = LOW;
+
+
 
 void setup() {
-
-  Serial.begin(9600);
-  pinMode(ledPin, OUTPUT);    //initialize the LED pin as an output
-  pinMode(buttonPin, INPUT);  //initialize the pushbutton pin as an output
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT);
+  pinMode(Relay_PIN, OUTPUT);
 }
-
 void loop() {
-
-  buttonState = digitalRead(buttonPin); //read the state of the pushbutton value
-
-  if (buttonState == HIGH) {            //check if the pushbutton is pressed
-    //if it is, the buttonState is HIGH
-    digitalWrite(ledPin, HIGH);         //turn LED on    
-    Serial.println("LED ON +++++++"); 
+  byte buttonState = digitalRead(BUTTON_PIN);
+  if (buttonState != lastButtonState) {
+    lastButtonState = buttonState;
+    if (buttonState == LOW) {
+      ledState = (ledState == HIGH) ? LOW: HIGH;
+      digitalWrite(LED_PIN, ledState);
+      digitalWrite(Relay_PIN, ledState);
+    }
   }
-  else {
-
-    digitalWrite(ledPin, LOW);          // turn LED off
-    Serial.println("LED OFF -------");
-  }
-
 }
