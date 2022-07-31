@@ -3,6 +3,9 @@
 The Design in tinkercad Open the link : 
 https://www.tinkercad.com/things/2siMxeUBJhd
 
+## Circuit design :
+![Tremendous Wolt-Blad (3)](https://user-images.githubusercontent.com/108204114/182014336-b12c453f-5b4e-48fe-8c7f-c9cae1a4a8df.png)
+
 ## Hardware Required 
 - Arduino Uno 
 - Relay DPDT
@@ -26,12 +29,13 @@ https://www.tinkercad.com/things/2siMxeUBJhd
 - wire connect to resistor leg , after that wire connect ground from resistor .
 - wire connect to button's other leg , after that connect to 5V from button .
 - Wire connect to button's top leg , after that connect to digital pin4 from button .
+- The negative line of the battery is connected directly to the bulb.
+- The positive right is connected to the com and then enters the Nc bulb.
 
-## Circuit design :
-![Tremendous Wolt-Blad (3)](https://user-images.githubusercontent.com/108204114/182014336-b12c453f-5b4e-48fe-8c7f-c9cae1a4a8df.png)
+
 
 ## The Code :
-```
+```c++
 #define LED_PIN 2
 #define BUTTON_PIN 4
 #define Relay_PIN 7
