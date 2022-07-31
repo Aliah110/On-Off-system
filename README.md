@@ -1,15 +1,19 @@
 # Push-Button-and-LED-control-with-the-Arduino
 
 The Design in tinkercad Open the link : 
-https://www.tinkercad.com/things/2siMxeUBJhd 
+https://www.tinkercad.com/things/2siMxeUBJhd
 
 ## Hardware Required 
 - Arduino Uno 
+- Relay DPDT
 - LED 
 - Button 
 - Resistor 
 - Wires 
 - Breadboard
+- Light bulb
+- 9V Battery
+
 
 ## Steps :
 - LED attach to board .
@@ -24,44 +28,41 @@ https://www.tinkercad.com/things/2siMxeUBJhd
 - Wire connect to button's top leg , after that connect to digital pin4 from button .
 
 ## Circuit design :
-![Tremendous Wolt-Blad](https://user-images.githubusercontent.com/108204114/181375273-fde23609-cf11-4910-a68e-3c4dabc81fa1.png)
+![Tremendous Wolt-Blad (3)](https://user-images.githubusercontent.com/108204114/182014336-b12c453f-5b4e-48fe-8c7f-c9cae1a4a8df.png)
 
 ## The Code :
 ```
-//set pin numbers
-const int ledPin = 2;         //const won't change
-const int buttonPin = 4;
+#define LED_PIN 2
+#define BUTTON_PIN 4
+#define Relay_PIN 7
 
-//variables will change
-int buttonState = 0;          //variables for reading the pushbutton status
+
+byte lastButtonState = LOW;
+byte ledState = LOW;
+
+
 
 void setup() {
-
-  Serial.begin(9600);
-  pinMode(ledPin, OUTPUT);    //initialize the LED pin as an output
-  pinMode(buttonPin, INPUT);  //initialize the pushbutton pin as an output
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT);
+  pinMode(Relay_PIN, OUTPUT);
 }
-
 void loop() {
-
-  buttonState = digitalRead(buttonPin); //read the state of the pushbutton value
-
-  if (buttonState == HIGH) {            //check if the pushbutton is pressed
-    //if it is, the buttonState is HIGH
-    digitalWrite(ledPin, HIGH);         //turn LED on    
-    Serial.println("LED ON +++++++"); 
+  byte buttonState = digitalRead(BUTTON_PIN);
+  if (buttonState != lastButtonState) {
+    lastButtonState = buttonState;
+    if (buttonState == LOW) {
+      ledState = (ledState == HIGH) ? LOW: HIGH;
+      digitalWrite(LED_PIN, ledState);
+      digitalWrite(Relay_PIN, ledState);
+    }
   }
-  else {
-
-    digitalWrite(ledPin, LOW);          // turn LED off
-    Serial.println("LED OFF -------");
-  }
-
 }
 ```
 ## The simulation 
-<img width="959" alt="image" src="https://user-images.githubusercontent.com/108204114/181376950-1fa2e826-7688-40d1-b6a7-49867899a1e3.png">
+<img width="538" alt="image" src="https://user-images.githubusercontent.com/108204114/182014585-dc5239e9-da8c-47c1-ade6-ba4e56f0f2f9.png">
 
 Reference : <br>
-https://youtu.be/58Ynhqmvzoc
+- https://youtu.be/58Ynhqmvzoc
+- https://roboticsbackend.com/arduino-turn-led-on-and-off-with-button/
 
